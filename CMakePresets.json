@@ -1,0 +1,54 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+      "major": 3,
+      "minor": 22,
+      "patch": 0
+    },
+    "configurePresets": [
+      {
+        "name": "linux",
+        "hidden": true,
+        "generator": "Ninja",
+        "condition": {
+          "type": "equals",
+          "lhs": "${hostSystemName}",
+          "rhs": "Linux"
+        }
+      },
+      {
+        "name": "dbg",
+        "hidden": true,
+        "cacheVariables": {
+          "CMAKE_BUILD_TYPE": {
+            "type": "STRING",
+            "value": "Debug"
+          }
+          }
+        },
+      {
+        "name": "build-debug",
+        "displayName": "build-debug",
+        "inherits": [
+          "linux",
+          "dbg"
+        ],
+        "binaryDir": "${sourceDir}/build/Debug/",
+        "cacheVariables": {
+          "CMAKE_CXX_COMPILER": {
+            "type": "PATH",
+            "value": "g++"
+          }
+        }
+      }
+    ],
+    "buildPresets": [
+      {
+        "name": "build-debug",
+        "configurePreset": "build-debug"
+      }
+    ],
+    "testPresets": [
+    ]
+  }
+  
